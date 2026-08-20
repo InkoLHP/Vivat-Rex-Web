@@ -20,19 +20,20 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   ];
 
   return (
-    <aside className="w-full md:w-72 bg-zinc-950 border-b md:border-b-0 md:border-r border-red-950/60 p-6 flex flex-col justify-between min-h-screen text-zinc-200 select-none">
-      {/* Topo: Marca / Título da Campanha */}
+    <aside className="w-full md:w-72 bg-[#18080a] border-b md:border-b-0 md:border-r border-[#702D28]/50 p-6 flex flex-col justify-between min-h-screen text-[#FAF4ED] select-none shadow-[5px_0_25px_rgba(0,0,0,0.5)] z-40 relative">
+      {/* Marca */}
       <div className="space-y-8">
-        <div>
-          <h1 className="text-3xl font-serif font-extrabold tracking-wider text-zinc-100">
-            Vivat <span className="text-red-600 drop-shadow-[0_0_10px_rgba(220,38,38,0.5)]">Rex</span>
+        <div className="relative">
+          <h1 className="text-3xl font-serif font-black tracking-widest text-[#FAF4ED]">
+            Vivat <span className="text-[#D86252] drop-shadow-[0_2px_10px_rgba(216,98,82,0.4)]">Rex</span>
           </h1>
-          <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest mt-1 border-l-2 border-red-700 pl-2">
+          <p className="text-[10px] font-mono text-[#D86252] uppercase tracking-[0.25em] mt-1.5 border-l-2 border-[#702D28] pl-2.5 font-bold">
             Crônicas da Noite
           </p>
+          <div className="mt-4 h-[1px] w-full bg-gradient-to-r from-[#D86252] via-[#702D28] to-transparent" />
         </div>
 
-        {/* Menu de Navegação */}
+        {/* Navegação */}
         <nav className="space-y-2">
           {menuItems.map((item) => {
             const Icon = item.icon;
@@ -42,13 +43,13 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-md font-serif text-sm transition-all duration-300 ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded transition-all duration-300 font-serif text-sm tracking-wide ${
                   isActive
-                    ? "bg-red-950/40 text-red-500 border-l-4 border-red-600 font-bold shadow-[inset_0_0_12px_rgba(153,27,27,0.2)]"
-                    : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60"
+                    ? "bg-[#702D28]/80 text-[#FAF4ED] border-l-4 border-[#D86252] font-bold shadow-[inset_0_0_12px_rgba(216,98,82,0.2)]"
+                    : "text-[#FAF4ED]/80 hover:text-[#FAF4ED] hover:bg-[#280F0D] hover:border-l-2 hover:border-[#D86252]"
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? "text-red-500" : "text-zinc-500"}`} />
+                <Icon className={`w-4 h-4 transition-colors ${isActive ? "text-[#FAF4ED]" : "text-[#D86252]"}`} />
                 <span>{item.label}</span>
               </button>
             );
@@ -56,36 +57,36 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
         </nav>
       </div>
 
-      {/* Widget do Player de Música (Inferior) */}
-      <div className="mt-8 bg-zinc-900/80 border border-red-950/40 p-4 rounded-lg shadow-lg space-y-3">
-        <div className="flex items-center justify-between text-xs font-mono text-zinc-400 border-b border-zinc-800 pb-2">
-          <span className="truncate max-w-[130px] text-zinc-300">Tema da Campanha</span>
-          <span className="text-[10px] text-red-500 font-bold uppercase">Áudio</span>
+      {/* Player */}
+      <div className="mt-8 bg-[#280F0D] border border-[#702D28]/60 p-4 rounded shadow-lg space-y-3 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D86252]/60 to-transparent" />
+
+        <div className="flex items-center justify-between text-xs font-mono text-[#FAF4ED] border-b border-[#702D28]/50 pb-2">
+          <span className="truncate max-w-[130px] font-serif tracking-wide text-[#FAF4ED]">Tema da Campanha</span>
+          <span className="text-[9px] text-[#D86252] font-bold uppercase tracking-widest">Áudio</span>
         </div>
 
-        {/* Barra de Progresso Fictícia */}
-        <div className="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
-          <div className="bg-red-600 h-full w-1/3 transition-all duration-300" />
+        <div className="w-full bg-[#18080a] h-1.5 rounded-full overflow-hidden border border-[#702D28]/50">
+          <div className="bg-gradient-to-r from-[#702D28] to-[#D86252] h-full w-1/3 transition-all duration-300" />
         </div>
 
-        {/* Controles de Áudio */}
         <div className="flex items-center justify-between pt-1">
           <button
             onClick={() => setIsMuted(!isMuted)}
-            className="text-zinc-400 hover:text-zinc-100 transition-colors"
+            className="text-[#FAF4ED]/80 hover:text-[#D86252] transition-colors"
             title="Mudar Volume"
           >
-            {isMuted ? <VolumeX className="w-4 h-4 text-red-500" /> : <Volume2 className="w-4 h-4" />}
+            {isMuted ? <VolumeX className="w-4 h-4 text-[#D86252]" /> : <Volume2 className="w-4 h-4" />}
           </button>
 
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="w-9 h-9 rounded-full bg-red-950 hover:bg-red-900 border border-red-700/50 flex items-center justify-center text-zinc-100 transition-all shadow-[0_0_10px_rgba(220,38,38,0.3)]"
+            className="w-9 h-9 rounded-full bg-[#702D28] hover:bg-[#943C36] border border-[#D86252]/50 flex items-center justify-center text-[#FAF4ED] transition-all shadow-[0_0_12px_rgba(216,98,82,0.3)]"
           >
-            {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
+            {isPlaying ? <Pause className="w-4 h-4 text-[#FAF4ED]" /> : <Play className="w-4 h-4 ml-0.5 text-[#FAF4ED]" />}
           </button>
 
-          <span className="text-[10px] font-mono text-zinc-500">01:24</span>
+          <span className="text-[10px] font-mono text-[#FAF4ED]/70">01:24</span>
         </div>
       </div>
     </aside>
